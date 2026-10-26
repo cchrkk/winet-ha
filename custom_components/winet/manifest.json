@@ -1,0 +1,11 @@
+{
+  "domain": "winet",
+  "name": "WiNET Stove",
+  "codeowners": ["@cchrkk"],
+  "config_flow": true,
+  "documentation": "https://github.com/cchrkk/winet-ha",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/cchrkk/winet-ha/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}

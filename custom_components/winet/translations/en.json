@@ -1,0 +1,84 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "WiNET Stove",
+        "description": "Enter the IP address of the WiNET module (for example 10.0.0.54).",
+        "data": {
+          "host": "IP address",
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot reach the WiNET module.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "This module is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "WiNET options",
+        "description": "Polling interval and the room temperature sensor used as current temperature.",
+        "data": {
+          "scan_interval": "Update interval",
+          "temperature_sensor": "Room temperature sensor"
+        }
+      }
+    }
+  },
+  "entity": {
+    "climate": {
+      "stove": {
+        "name": "Stove"
+      }
+    },
+    "sensor": {
+      "phase": {
+        "name": "Phase",
+        "state": {
+          "off": "Off",
+          "waiting_flame": "Waiting for flame",
+          "ignition": "Ignition",
+          "running": "Running",
+          "standby": "Stand-by",
+          "final_cleaning": "Final cleaning",
+          "brazier_cleaning": "Brazier cleaning",
+          "alarm": "Alarm",
+          "alarm_memory": "Alarm memory",
+          "unknown": "Unknown"
+        }
+      },
+      "flue": {
+        "name": "Flue"
+      },
+      "air": {
+        "name": "Air"
+      },
+      "setpoint": {
+        "name": "Setpoint"
+      },
+      "wifi_signal": {
+        "name": "Wi-Fi signal"
+      }
+    },
+    "number": {
+      "power": {
+        "name": "Power"
+      }
+    },
+    "select": {
+      "fan": {
+        "name": "Fan"
+      }
+    },
+    "binary_sensor": {
+      "alarm": {
+        "name": "Alarm"
+      }
+    }
+  }
+}

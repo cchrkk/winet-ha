@@ -1,0 +1,84 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Stufa WiNET",
+        "description": "Inserisci l'indirizzo IP del modulo WiNET (per esempio 10.0.0.54).",
+        "data": {
+          "host": "Indirizzo IP",
+          "name": "Nome"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossibile raggiungere il modulo WiNET.",
+      "unknown": "Errore imprevisto."
+    },
+    "abort": {
+      "already_configured": "Questo modulo è già configurato."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opzioni WiNET",
+        "description": "Intervallo di polling e sensore di temperatura ambiente da usare come temperatura corrente.",
+        "data": {
+          "scan_interval": "Intervallo di aggiornamento",
+          "temperature_sensor": "Sensore temperatura ambiente"
+        }
+      }
+    }
+  },
+  "entity": {
+    "climate": {
+      "stove": {
+        "name": "Stufa"
+      }
+    },
+    "sensor": {
+      "phase": {
+        "name": "Fase",
+        "state": {
+          "off": "Spenta",
+          "waiting_flame": "Attesa fiamma",
+          "ignition": "Accensione",
+          "running": "Lavoro",
+          "standby": "Stand-by",
+          "final_cleaning": "Pulizia finale",
+          "brazier_cleaning": "Pulizia braciere",
+          "alarm": "Allarme",
+          "alarm_memory": "Memoria allarme",
+          "unknown": "Sconosciuta"
+        }
+      },
+      "flue": {
+        "name": "Fumi"
+      },
+      "air": {
+        "name": "Aria"
+      },
+      "setpoint": {
+        "name": "Setpoint"
+      },
+      "wifi_signal": {
+        "name": "Segnale Wi-Fi"
+      }
+    },
+    "number": {
+      "power": {
+        "name": "Potenza"
+      }
+    },
+    "select": {
+      "fan": {
+        "name": "Ventola"
+      }
+    },
+    "binary_sensor": {
+      "alarm": {
+        "name": "Allarme"
+      }
+    }
+  }
+}
