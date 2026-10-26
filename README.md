@@ -1,69 +1,77 @@
-# WiNET Stove — integrazione Home Assistant
+# WiNET Stove — Home Assistant integration
 
-Integrazione custom (HACS) per le stufe a pellet con modulo **WiNET** di Net
-Software / StufaSmart, pilotata dalle **API locali** del modulo: niente cloud.
+Custom HACS integration for pellet stoves with the **WiNET** module from
+Net Software / StufaSmart, driven through the module's **local API**: no cloud.
 
-## Cosa crea
+## Entities
 
-Un device unico con:
+A single device exposing:
 
-| Entità | Cosa fa |
+| Entity | Purpose |
 |---|---|
-| `climate.stufa` | on/off, setpoint, temperatura corrente (da sensore esterno o sonda stufa) |
-| `sensor.stufa_fase` | fase dettagliata: attesa fiamma, accensione, lavoro, stand-by, pulizia finale, pulizia braciere, allarme |
-| `sensor.stufa_fumi` | temperatura fumi |
-| `sensor.stufa_aria` | temperatura letta dalla sonda della stufa |
-| `sensor.stufa_setpoint` | setpoint impostato |
-| `sensor.stufa_segnale_wifi` | segnale del modulo (diagnostica) |
-| `number.stufa_potenza` | potenza 1..N (N letto dal modulo) |
-| `select.stufa_ventola` | ventola 0/1/2 |
-| `binary_sensor.stufa_allarme` | allarme o memoria allarme |
+| `climate.stove` | on/off, target temperature, current temperature (external sensor or stove probe) |
+| `sensor.stove_phase` | detailed phase: waiting for flame, ignition, running, stand-by, final cleaning, brazier cleaning, alarm |
+| `sensor.stove_flue` | flue temperature |
+| `sensor.stove_air` | temperature read by the stove probe |
+| `sensor.stove_setpoint` | configured setpoint |
+| `sensor.stove_wifi_signal` | module signal (diagnostic) |
+| `number.stove_power` | power 1..N (N read from the module) |
+| `select.stove_fan` | fan 0/1/2 |
+| `binary_sensor.stove_alarm` | alarm or alarm memory |
 
-## Installazione
+Entity IDs are derived from the device name chosen during setup, so the examples
+above use `stove`; with the default name in Italian they become `climate.stufa`,
+`sensor.stufa_fase`, and so on.
 
-### HACS (repository custom)
+## Installation
 
-1. HACS → Integrations → menu ⋮ → **Custom repositories**
-2. URL del repo, categoria **Integration**, Aggiungi
-3. Installa **WiNET Stove**
-4. Riavvia Home Assistant
-5. Impostazioni → Dispositivi e servizi → **Aggiungi integrazione** → *WiNET Stove*
-6. IP: `10.0.0.54` (o quello del modulo)
+### HACS (custom repository)
 
-### Manuale
+1. HACS → Integrations → ⋮ → **Custom repositories**
+2. Repository URL, category **Integration**, add
+3. Install **WiNET Stove**
+4. Restart Home Assistant
+5. Settings → Devices & services → **Add integration** → *WiNET Stove*
+6. Enter the module IP (for example `10.0.0.54`)
 
-Copia `custom_components/winet` in `<config>/custom_components/winet` e riavvia.
+### Manual
 
-Lo script `deploy.ps1` copia l'integrazione su `\\10.0.0.85\config` con backup
-della versione precedente.
+Copy `custom_components/winet` to `<config>/custom_components/winet` and restart.
 
-## Opzioni
+`deploy.ps1` copies the integration to a Windows/SMB config share and keeps a
+backup of the previous version.
 
-- **Intervallo di aggiornamento**: default 10 s (min 5, max 300)
-- **Sensore temperatura ambiente**: se impostato, `climate` usa quello come
-  `current_temperature`. Consigliato: la stufa è in corridoio e la sua sonda
-  misura l'aria vicino alla stufa, non la casa.
+## Options
 
-## API usate
+- **Update interval**: default 10 s (min 5, max 300)
+- **Room temperature sensor**: when set, `climate` uses it as
+  `current_temperature`. Recommended: the stove probe measures the air next to
+  the stove, not the room.
 
-- `GET /api/id` — identità (MAC per l'unique_id)
-- `GET /api/global` — fumi, potenza, stato sintetico
-- `POST /ajax/get-registers` `key=020&category=2` — registro dettagliato
+## API used
+
+- `GET /api/id` — identity (MAC used as unique_id)
+- `GET /api/global` — flue temperature, power, coarse state
+- `POST /ajax/get-registers` `key=020&category=2` — detailed register
 - `POST /api/status/1|0`, `POST /api/power/N`, `POST /api/temperature/air/T`
-  (T in **mezzi gradi**: 25 °C = `50`)
-- `POST /ajax/set-register` `key=002&memory=1&regId=47&value=N` — ventola
+  (T in **half degrees**: 25 °C = `50`)
+- `POST /ajax/set-register` `key=002&memory=1&regId=47&value=N` — fan
 
-Le API locali non hanno autenticazione: il modulo va tenuto su una rete fidata.
+The local API has no authentication: keep the module on a trusted network.
 
-## Note
+## Notes
 
-- Il setpoint della stufa viene scalato con `setTempDiv`, la temperatura aria con
-  `tempDiv`, letti dal registro: niente `/2` fisso.
-- La fase usa il codice del registro 2 (0–9), non lo stato sintetico di
-  `/api/global` che perde accensione, lavoro e stand-by.
-- L'allarme è un `binary_sensor` separato: non implica "vasca vuota".
-- `climate.turn_off` spegne davvero la stufa: usarlo solo quando serve.
+- The stove setpoint is scaled with `setTempDiv`, the air temperature with
+  `tempDiv`, both read from the register: no hard-coded `/2`.
+- The phase uses register 2 (0–9), not the coarse `/api/global` state, which
+  loses ignition, running and stand-by.
+- The alarm is a separate `binary_sensor`: it does not imply an empty hopper.
+- `climate.turn_off` really turns the stove off: use it only when needed.
 
-## Licenza
+## License
 
 MIT.
+
+---
+
+Italiano: [README.it.md](README.it.md)

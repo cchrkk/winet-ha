@@ -2,30 +2,30 @@
   "config": {
     "step": {
       "user": {
-        "title": "Stufa WiNET",
-        "description": "Inserisci l'indirizzo IP del modulo WiNET (per esempio 10.0.0.54).",
+        "title": "WiNET Stove",
+        "description": "Enter the IP address of the WiNET module (for example 10.0.0.54).",
         "data": {
-          "host": "Indirizzo IP",
-          "name": "Nome"
+          "host": "IP address",
+          "name": "Name"
         }
       }
     },
     "error": {
-      "cannot_connect": "Impossibile raggiungere il modulo WiNET.",
-      "unknown": "Errore imprevisto."
+      "cannot_connect": "Cannot reach the WiNET module.",
+      "unknown": "Unexpected error."
     },
     "abort": {
-      "already_configured": "Questo modulo è già configurato."
+      "already_configured": "This module is already configured."
     }
   },
   "options": {
     "step": {
       "init": {
-        "title": "Opzioni WiNET",
-        "description": "Intervallo di polling e sensore di temperatura ambiente da usare come temperatura corrente.",
+        "title": "WiNET options",
+        "description": "Polling interval and the room temperature sensor used as current temperature.",
         "data": {
-          "scan_interval": "Intervallo di aggiornamento",
-          "temperature_sensor": "Sensore temperatura ambiente"
+          "scan_interval": "Update interval",
+          "temperature_sensor": "Room temperature sensor"
         }
       }
     }
@@ -33,51 +33,51 @@
   "entity": {
     "climate": {
       "stove": {
-        "name": "Stufa"
+        "name": "Stove"
       }
     },
     "sensor": {
       "phase": {
-        "name": "Fase",
+        "name": "Phase",
         "state": {
-          "off": "Spenta",
-          "waiting_flame": "Attesa fiamma",
-          "ignition": "Accensione",
-          "running": "Lavoro",
+          "off": "Off",
+          "waiting_flame": "Waiting for flame",
+          "ignition": "Ignition",
+          "running": "Running",
           "standby": "Stand-by",
-          "final_cleaning": "Pulizia finale",
-          "brazier_cleaning": "Pulizia braciere",
-          "alarm": "Allarme",
-          "alarm_memory": "Memoria allarme",
-          "unknown": "Sconosciuta"
+          "final_cleaning": "Final cleaning",
+          "brazier_cleaning": "Brazier cleaning",
+          "alarm": "Alarm",
+          "alarm_memory": "Alarm memory",
+          "unknown": "Unknown"
         }
       },
       "flue": {
-        "name": "Fumi"
+        "name": "Flue"
       },
       "air": {
-        "name": "Aria"
+        "name": "Air"
       },
       "setpoint": {
         "name": "Setpoint"
       },
       "wifi_signal": {
-        "name": "Segnale Wi-Fi"
+        "name": "Wi-Fi signal"
       }
     },
     "number": {
       "power": {
-        "name": "Potenza"
+        "name": "Power"
       }
     },
     "select": {
       "fan": {
-        "name": "Ventola"
+        "name": "Fan"
       }
     },
     "binary_sensor": {
       "alarm": {
-        "name": "Allarme"
+        "name": "Alarm"
       }
     }
   }
