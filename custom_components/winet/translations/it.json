@@ -6,7 +6,9 @@
         "description": "Inserisci l'indirizzo IP del modulo WiNET (per esempio 10.0.0.54).",
         "data": {
           "host": "Indirizzo IP",
-          "name": "Nome"
+          "name": "Nome",
+          "scan_interval": "Intervallo di aggiornamento",
+          "fan_speeds": "Velocità ventola (0 = spenta)"
         }
       }
     },
@@ -25,6 +27,7 @@
         "description": "Intervallo di polling e sensore di temperatura ambiente da usare come temperatura corrente.",
         "data": {
           "scan_interval": "Intervallo di aggiornamento",
+          "fan_speeds": "Velocità ventola (0 = spenta)",
           "temperature_sensor": "Sensore temperatura ambiente"
         }
       }

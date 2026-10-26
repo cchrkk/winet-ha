@@ -6,7 +6,9 @@
         "description": "Enter the IP address of the WiNET module (for example 10.0.0.54).",
         "data": {
           "host": "IP address",
-          "name": "Name"
+          "name": "Name",
+          "scan_interval": "Update interval",
+          "fan_speeds": "Fan speeds (0 = off)"
         }
       }
     },
@@ -25,6 +27,7 @@
         "description": "Polling interval and the room temperature sensor used as current temperature.",
         "data": {
           "scan_interval": "Update interval",
+          "fan_speeds": "Fan speeds (0 = off)",
           "temperature_sensor": "Room temperature sensor"
         }
       }

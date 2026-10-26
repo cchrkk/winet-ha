@@ -10,6 +10,11 @@ MAX_SCAN_INTERVAL = 300
 
 CONF_HOST = "host"
 CONF_TEMP_SENSOR = "temperature_sensor"
+CONF_FAN_SPEEDS = "fan_speeds"
+
+DEFAULT_FAN_SPEEDS = 3
+MIN_FAN_SPEEDS = 1
+MAX_FAN_SPEEDS = 5
 
 # Codici del registro 2 (key=020, category=2).
 STATUS_KEYS: dict[int, str] = {

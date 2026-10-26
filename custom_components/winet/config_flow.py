@@ -21,12 +21,16 @@ from homeassistant.helpers.selector import (
 
 from .api import WinetApi, WinetError
 from .const import (
+    CONF_FAN_SPEEDS,
     CONF_HOST,
     CONF_TEMP_SENSOR,
+    DEFAULT_FAN_SPEEDS,
     DEFAULT_NAME,
     DEFAULT_SCAN_INTERVAL,
     DOMAIN,
+    MAX_FAN_SPEEDS,
     MAX_SCAN_INTERVAL,
+    MIN_FAN_SPEEDS,
     MIN_SCAN_INTERVAL,
 )
 
@@ -43,6 +47,17 @@ def _scan_interval_selector() -> NumberSelector:
             step=1,
             mode=NumberSelectorMode.BOX,
             unit_of_measurement="s",
+        )
+    )
+
+
+def _fan_speeds_selector() -> NumberSelector:
+    return NumberSelector(
+        NumberSelectorConfig(
+            min=MIN_FAN_SPEEDS,
+            max=MAX_FAN_SPEEDS,
+            step=1,
+            mode=NumberSelectorMode.BOX,
         )
     )
 
@@ -68,6 +83,10 @@ def _base_schema(values: dict[str, Any] | None = None) -> vol.Schema:
                 default=values.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
             ): _scan_interval_selector(),
             vol.Optional(
+                CONF_FAN_SPEEDS,
+                default=values.get(CONF_FAN_SPEEDS, DEFAULT_FAN_SPEEDS),
+            ): _fan_speeds_selector(),
+            vol.Optional(
                 CONF_TEMP_SENSOR,
                 description={
                     "suggested_value": values.get(CONF_TEMP_SENSOR)
@@ -85,6 +104,10 @@ def _options_schema(options: dict[str, Any] | None = None) -> vol.Schema:
                 CONF_SCAN_INTERVAL,
                 default=options.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL),
             ): _scan_interval_selector(),
+            vol.Optional(
+                CONF_FAN_SPEEDS,
+                default=options.get(CONF_FAN_SPEEDS, DEFAULT_FAN_SPEEDS),
+            ): _fan_speeds_selector(),
             vol.Optional(
                 CONF_TEMP_SENSOR,
                 description={
@@ -127,6 +150,9 @@ class WinetConfigFlow(ConfigFlow, domain=DOMAIN):
                         CONF_SCAN_INTERVAL: user_input.get(
                             CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL
                         ),
+                        CONF_FAN_SPEEDS: user_input.get(
+                            CONF_FAN_SPEEDS, DEFAULT_FAN_SPEEDS
+                        ),
                         CONF_TEMP_SENSOR: user_input.get(CONF_TEMP_SENSOR) or None,
                     },
                 )
@@ -144,7 +170,7 @@ class WinetConfigFlow(ConfigFlow, domain=DOMAIN):
 
 
 class WinetOptionsFlow(OptionsFlow):
-    """Opzioni: intervallo e sensore ambiente esterno."""
+    """Opzioni: intervallo, velocità ventola e sensore ambiente esterno."""
 
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None

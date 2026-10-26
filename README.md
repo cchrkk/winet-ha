@@ -32,7 +32,15 @@ above use `stove`; with the default name in Italian they become `climate.stufa`,
 3. Install **WiNET Stove**
 4. Restart Home Assistant
 5. Settings → Devices & services → **Add integration** → *WiNET Stove*
-6. Enter the module IP (for example `10.0.0.54`)
+6. Enter the module IP and a name (use distinct names for multiple stoves)
+
+### Multiple stoves
+
+Yes. Add the integration once per module, each with its own IP and a distinct
+name, for example `Stufa Piano Terra` and `Stufa Taverna`. The unique ID is the
+module MAC, so entries do not collide; entity IDs are derived from the name
+(`climate.stufa_piano_terra`, ...). If two entries use the same name, Home
+Assistant appends `_2`.
 
 ### Manual
 
@@ -44,6 +52,8 @@ backup of the previous version.
 ## Options
 
 - **Update interval**: default 10 s (min 5, max 300)
+- **Fan speeds**: number of speeds excluding off (default 3 → `0,1,2,3`). Set 2
+  for stoves with off + two speeds.
 - **Room temperature sensor**: when set, `climate` uses it as
   `current_temperature`. Recommended: the stove probe measures the air next to
   the stove, not the room.

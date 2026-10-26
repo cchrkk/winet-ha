@@ -32,7 +32,15 @@ Gli entity ID derivano dal nome scelto in configurazione (default "Stufa").
 3. Installa **WiNET Stove**
 4. Riavvia Home Assistant
 5. Impostazioni → Dispositivi e servizi → **Aggiungi integrazione** → *WiNET Stove*
-6. IP: `10.0.0.54` (o quello del modulo)
+6. IP del modulo e un nome (nomi diversi se hai più stufe)
+
+### Più stufe
+
+Sì. Si aggiunge l'integrazione una volta per modulo, ognuna col suo IP e un nome
+diverso, per esempio `Stufa Piano Terra` e `Stufa Taverna`. L'unique ID è il MAC
+del modulo, quindi le entry non collidono; gli entity ID derivano dal nome
+(`climate.stufa_piano_terra`, ...). Se due entry hanno lo stesso nome, Home
+Assistant aggiunge `_2`.
 
 ### Manuale
 
@@ -44,6 +52,8 @@ della versione precedente.
 ## Opzioni
 
 - **Intervallo di aggiornamento**: default 10 s (min 5, max 300)
+- **Velocità ventola**: numero di velocità esclusa la spenta (default 3 →
+  `0,1,2,3`). Mettere 2 per stufe con spenta + due velocità.
 - **Sensore temperatura ambiente**: se impostato, `climate` usa quello come
   `current_temperature`. Consigliato: la sonda della stufa misura l'aria vicino
   alla stufa, non la stanza.
